@@ -9,12 +9,13 @@ function sendGreeting() {
         data: {
             email: $("#exampleInputEmail").val()
         },
-        dataType: 'text'
+        dataType: 'json'
     }).done(function (data) {
+        let response = JSON.parse(JSON.stringify(data));
         if (!$.contains(document.querySelector('.form-group'), document.querySelector('h1'))) {
-            $('.form-group').prepend('<h1>' + data + '</h1>')
+            $('.form-group').prepend('<h1>' + response.email + '</h1>')
         } else {
-            $('.form-group > h1').replaceWith('<h1>' + data + '</h1>')
+            $('.form-group > h1').replaceWith('<h1>' + response.email + '</h1>')
         }
     }).fail(function (error) {
         alert(error);
